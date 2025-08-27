@@ -196,6 +196,7 @@ func createModProxy() (*httputil.ReverseProxy, error) {
 	if proxyUrlStr == nil || *proxyUrlStr == "" {
 		return nil, fmt.Errorf("PROXY_TO is required")
 	}
+	logger.Debug("proxying to url", "url", proxyUrlStr)
 	proxyUrl, err := url.Parse(*proxyUrlStr)
 	if err != nil {
 		return nil, err

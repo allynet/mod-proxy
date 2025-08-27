@@ -28,4 +28,5 @@ RUN --mount=from=builder,source=/build,target=/build upx --best --lzma /build/ma
 
 FROM scratch
 COPY --from=compressor /final/main /
+EXPOSE 8080
 ENTRYPOINT ["/main"]
