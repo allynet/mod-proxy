@@ -196,7 +196,7 @@ func createModProxy() (*httputil.ReverseProxy, error) {
 	if proxyUrlStr == nil || *proxyUrlStr == "" {
 		return nil, fmt.Errorf("PROXY_TO is required")
 	}
-	logger.Debug("proxying to url", "url", proxyUrlStr)
+	logger.Debug("Proxying to URL", "url", proxyUrlStr)
 	proxyUrl, err := url.Parse(*proxyUrlStr)
 	if err != nil {
 		return nil, err
@@ -212,11 +212,9 @@ func createModProxy() (*httputil.ReverseProxy, error) {
 		Rewrite: func(r *httputil.ProxyRequest) {
 			r.SetXForwarded()
 			r.SetURL(proxyUrl)
-			fmt.Printf("BEFORE: %+q\n", r.Out.Header)
 			for _, handler := range reqHandlers {
 				handler.handler(r.Out)
 			}
-			fmt.Printf("AFTER: %+q\n", r.Out.Header)
 		},
 	}
 
